@@ -27,21 +27,24 @@ Kota VARCHAR(15),
 kodepos VARCHAR(15),
 no_hp VARCHAR(15),
 kd_ds VARCHAR(10)
+PRIMARY KEY(nim),
+CONSTRAINT fk_Dosen FOREIGN KEY (kd_ds)
+REFERENCES dosen(kd_ds)
 );
 
 INSERT INTO Mahasiwa (`nim`, `nama`, `jk`, `tgl_lahir`, 'jalan',`Kota`,'kodepos','nohp',`kd_ds`) VALUES
-('1812345', 'Ari Santoso', 'L', '1999-10-11', 'Bekasi', 'DS002'),
-('1823456', 'Dina Marlina', 'P', '1998-11-20', 'Jakarta'),
-('1834567', 'Rahmat Hidayat', 'L', '1999-05-10', 'Bekasi'),
-('1845678', 'Jaka Sampurna', 'L', '2000-10-19', 'Cikarang'),
-('1856789', 'Tia Lestari', 'P', '1999-02-15', 'Karawang'),
-('1867890', 'Anton Sinaga', 'L', '1998-06-22', '', 'Bekasi'),
-('1912345', 'Listia Nastiti', 'P', '2001-10-23', 'Jakarta'),
-('1923456', 'Amira Jarisa', 'P', '2001-01-24', 'Karawang', 'DS004'),
-('1934567', 'Laksana Mardito', 'L', '1999-04-14', 'Cikarang'),
-('1945678', 'Jura Marsina', 'p', '2000-05-10', 'Cikarang'),
-('1956789', 'Dadi Martani', 'L', '2001-08-29', 'Bekasi', 'DS005'),
-('1967890', 'Bayu Laksono', 'L', '1999-07-22', 'Cikarang', 'DS004'),
+('1812345', 'Ari Santoso', 'L', '1999-10-11','', 'Bekasi','','', 'DS002'),
+('1823456', 'Dina Marlina', 'P', '1998-11-20','','Jakarta','','',''),
+('1834567', 'Rahmat Hidayat', 'L', '1999-05-10', '','Bekasi','','',''),
+('1845678', 'Jaka Sampurna', 'L', '2000-10-19', '','Cikarang','','',''),
+('1856789', 'Tia Lestari', 'P', '1999-02-15', '','Karawang','','',''),
+('1867890', 'Anton Sinaga', 'L', '1998-06-22', '', 'Bekasi','','',''),
+('1912345', 'Listia Nastiti', 'P', '2001-10-23','', 'Jakarta','','',''),
+('1923456', 'Amira Jarisa', 'P', '2001-01-24','', 'Karawang', '','','DS004'),
+('1934567', 'Laksana Mardito', 'L', '1999-04-14','', 'Cikarang','','',''),
+('1945678', 'Jura Marsina', 'p', '2000-05-10', '','Cikarang','','',''),
+('1956789', 'Dadi Martani', 'L', '2001-08-29', '','Bekasi','','', 'DS005'),
+('1967890', 'Bayu Laksono', 'L', '1999-07-22', '','Cikarang','','', 'DS004'),
 
 SELECT * FROM Mahasiswa;
 
@@ -50,6 +53,7 @@ CREATE TABLE Matakuliah(
 kd_mk VARCHAR(10) NOT NULL PRIMARY KEY,
 nama VARCHAR(25) NOT NULL,
 sks VARCHAR(30)
+
 );
 
 INSERT INTO (`kd_mk`, `nama`, `sks`) VALUES
@@ -65,12 +69,14 @@ INSERT INTO (`kd_mk`, `nama`, `sks`) VALUES
 SELECT * FROM Matakuliah;
 
 CREATE TABLE JadwalMengajar(
-kd_mk VARCHAR(50) NOT NULL,
-kd_ds VARCHAR(50) NOT NULL,
+kd_mk VARCHAR(10) NOT NULL,
+kd_ds VARCHAR(10) NOT NULL,
 hari ENUM('Senin', 'Selasa', 'Rabu', 'Kamis'),
 jam TIME NOT NULL,
 ruang VARCHAR(50),
-PRIMARY KEY(kd_mk, kd_ds)
+PRIMARY KEY(kd_mk, kd_ds),
+CONSTRAINT fk_Matakuliah FOREIGN KEY (kd_mk) REFERENCES Matakuliah(kd_mk),
+CONSTRAINT fk_Dosen_Jadwal FOREIGN KEY (kd_ds) REFERENCES Dosen(kd_ds)
 );
 
 INSERT INTO  JadwalMengajar (`kd_mk`, `kd_ds`, `hari`, `jam`, `ruang`) VALUES
@@ -87,19 +93,24 @@ SELECT * FROM JadwalMengajar;
 
 CREATE TABLE KRSMahasiswa(
 nim VARCHAR(10) NOT NULL,
-kd_mk VARCHAR(50) NOT NULL,
-kd_ds VARCHAR(50) NOT NULL,
-semester VARCHAR(30) NOT NULL,
-nilai VARCHAR(50) DEFAULT NULL
+kd_mk VARCHAR(10) NOT NULL,
+kd_ds VARCHAR(10) NOT NULL,
+semester VARCHAR(15),
+nilai VARCHAR(15),
+PRIMARY KEY(nim, kd_mk, kd_ds),
+CONSTRAINT fk_Mahasiswa FOREIGN KEY (nim) REFERENCES Mahasiswa(nim),
+CONSTRAINT fk_Matakuliah_KRS FOREIGN KEY (kd_mk) REFERENCES Matakuliah(kd_mk),
+CONSTRAINT fk_Dosen_KRS FOREIGN KEY (kd_ds) REFERENCES Dosen(kd_ds)
 );
 
+INSERT INTO KRSMahasiswa (`nim`, `kd_mk`, `kd_ds`, `semester`) VALUES
+('1823456', 'MK001', 'DS002', '3'),
+('1823456', 'MK002', 'DS002', '1'),
+('1823456', 'MK003', 'DS001', '3'),
+('1823456', 'MK004', 'DS001', '3'),
+('1823456', 'MK007', 'DS005', '3'),
+('1823456', 'MK008', 'DS005', '3');
 
-INSERT INTO `praktikum5`.`KRSMahasiswa` (`nim`, `kd_mk`, `kd_ds`, `semester`) VALUES ('1823456', 'MK001', 'DS002', '3');
-INSERT INTO `praktikum5`.`KRSMahasiswa` (`nim`, `kd_mk`, `kd_ds`, `semester`) VALUES ('1823456', 'MK002', 'DS002', '1');
-INSERT INTO `praktikum5`.`KRSMahasiswa` (`nim`, `kd_mk`, `kd_ds`, `semester`) VALUES ('1823456', 'MK003', 'DS001', '3');
-INSERT INTO `praktikum5`.`KRSMahasiswa` (`nim`, `kd_mk`, `kd_ds`, `semester`) VALUES ('1823456', 'MK004', 'DS001', '3');
-INSERT INTO `praktikum5`.`KRSMahasiswa` (`nim`, `kd_mk`, `kd_ds`, `semester`) VALUES ('1823456', 'MK007', 'DS005', '3');
-INSERT INTO `praktikum5`.`KRSMahasiswa` (`nim`, `kd_mk`, `kd_ds`, `semester`) VALUES ('1823456', 'MK008', 'DS005', '3');
 
 SELECT * FROM KRSMahasiswa;
 
