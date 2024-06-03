@@ -153,7 +153,8 @@ SELECT Mahasiswa.nim, Mahasiswa.nama, Mahasiswa.jk, Dosen.nama AS "Dosen PA"
 FROM Mahasiswa INNER JOIN Dosen ON Dosen.kd_ds = Mahasiswa.kd_ds;
 ```
 
-![image].(ss/join table Mahasiswa dan Dosen.png)
+![join table Mahasiswa dan Dosen](https://github.com/Gladis32/TugasPraktikum5/assets/148181064/27b3fa6b-c620-4cc3-a5be-b77a144957ad)
+
 
 **2.LEFT JOIN table Mahasiswa dan Dosen**
 
@@ -161,8 +162,9 @@ FROM Mahasiswa INNER JOIN Dosen ON Dosen.kd_ds = Mahasiswa.kd_ds;
 SELECT Mahasiswa.nim, Mahasiswa.nama, Mahasiswa.jk, Dosen.nama AS "Dosen PA"
 FROM Mahasiswa LEFT JOIN Dosen ON Dosen.kd_ds = Mahasiswa.kd_ds;
 ```
-[image](ss/LEFT JOIN table Mahasiswa dan Dosen.png)
-![image].(ss/LEFT JOIN table Mahasiswa dan Dosen.png
+
+![LEFT JOIN table Mahasiswa dan Dosen](https://github.com/Gladis32/TugasPraktikum5/assets/148181064/eca188e9-6792-44ea-8ae4-cda623eb3188)
+
 
 **3.JOIN table JadwalMengajar, Dosen, dan Matakuliah**
 
@@ -173,7 +175,8 @@ LEFT JOIN Matakuliah ON JadwalMengajar.kd_mk = Matakuliah.kd_mk
 LEFT JOIN Dosen ON JadwalMengajar.kd_ds = Dosen.kd_ds;
 ```
 
-![image](ss/join table JadwalMengajar, Dosen, dan Matakuluan.png)
+![join table JadwalMengajar, Dosen, dan Matakuluan](https://github.com/Gladis32/TugasPraktikum5/assets/148181064/d71b589f-fa47-4a09-8f68-53c2f60977f8)
+
 
 **4.JOIN table JadwalMengajar, Dosen, dan Matakuliah**
 
@@ -184,7 +187,8 @@ LEFT JOIN Matakuliah ON JadwalMengajar.kd_mk = Matakuliah.kd_mk
 LEFT JOIN Dosen ON JadwalMengajar.kd_ds = Dosen.kd_ds;
 ```
 
-![image](ss/join table JadwalMengajar, Dosen, dan Matakuliah2.png)
+![join table JadwalMengajar, Dosen, dan Matakuliah2](https://github.com/Gladis32/TugasPraktikum5/assets/148181064/cfc997a2-8384-4d9f-b2d9-f91679c06c21)
+
 
 **5.JOIN tabel KrsMahasiswa, Mahasiswa, Matakuliah, dan Dosen**
 
@@ -195,7 +199,7 @@ JOIN Mahasiswa ON KRSMahasiswa.nim = Mahasiswa.nim
 JOIN Matakuliah ON KRSMahasiswa.kd_mk = Matakuliah.kd_mk
 ```
 
-![image](ss/JOIN tabel KrsMahasiswa, Mahasiswa, Matakuliah, dan Dosen.png)
+![JOIN tabel KrsMahasiswa, Mahasiswa, Matakuliah, dan Dosen](https://github.com/Gladis32/TugasPraktikum5/assets/148181064/f08429d3-da5b-42ad-96a3-cda8dbf6f337)
 
 
 
